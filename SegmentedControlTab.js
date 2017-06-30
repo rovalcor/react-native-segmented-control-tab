@@ -21,7 +21,7 @@ const TabOption = ({
     firstTabStyle, lastTabStyle,
     tabStyle, activeTabStyle,
     tabTextStyle, activeTabTextStyle,
-    onTabPress,
+    tabNumberOfLines, onTabPress,
 }) => {
     return (
         <TouchableOpacity style={[
@@ -35,7 +35,8 @@ const TabOption = ({
             <Text style={[
                 styles.textStyle,
                 tabTextStyle,
-                isTabActive ? [styles.activeTabTextStyle, activeTabTextStyle] : {}]}>
+                isTabActive ? [styles.activeTabTextStyle, activeTabTextStyle] : {}]}
+                numberOfLines={tabNumberOfLines}>
                 {text}
             </Text>
         </TouchableOpacity>
@@ -47,7 +48,7 @@ const SegmentedControlTab = ({
     borderRadius, tabsContainerStyle,
     tabStyle, activeTabStyle,
     tabTextStyle, activeTabTextStyle,
-    onTabPress,
+    tabNumberOfLines, onTabPress,
 }) => {
     const firstTabStyle = [{ borderTopLeftRadius: borderRadius, borderBottomLeftRadius: borderRadius }];
     const lastTabStyle = [{ borderTopRightRadius: borderRadius, borderBottomRightRadius: borderRadius }];
@@ -70,7 +71,8 @@ const SegmentedControlTab = ({
                             tabStyle={[tabStyle, index !== 0 && index !== values.length - 1 ? { marginHorizontal: -1 } : {}]}
                             activeTabStyle={activeTabStyle}
                             tabTextStyle={tabTextStyle}
-                            activeTabTextStyle={activeTabTextStyle} />
+                            activeTabTextStyle={activeTabTextStyle}
+                            tabNumberOfLines={tabNumberOfLines} />
                     );
                 })
             }
@@ -83,6 +85,7 @@ SegmentedControlTab.propTypes = Object.assign({}, Component.propTypes, {
     multiple: PropTypes.bool,
     onTabPress: PropTypes.func,
     selectedIndex: PropTypes.number,
+    tabNumberOfLines: PropTypes.number,
     selectedIndices: PropTypes.arrayOf(PropTypes.number),
     tabsContainerStyle: View.propTypes.style,
     tabStyle: View.propTypes.style,
@@ -97,6 +100,7 @@ SegmentedControlTab.defaultProps = Object.assign({}, Component.propTypes, {
     multiple: false,
     selectedIndex: 0,
     selectedIndices: [0],
+    tabNumberOfLines: 1,
     onTabPress() { },
     tabsContainerStyle: {},
     tabStyle: {},
